@@ -1,6 +1,14 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/\_/husky.sh"
 
-# Usar %1 para Windows
+# Version corregida para Windows/Git Bash
 
-npx --no -- commitlint --edit "%1" --verbose
+# Detectar Windows/MINGW de una manera más compatible
+
+case "$(uname -s)" in
+MINGW* | MSYS*) # Windows (Git Bash/MINGW)
+npx --no -- commitlint --edit "$1" --verbose
+;;
+\*) # Unix/Linux u otros sistemas
+npx --no -- commitlint --edit "$1" --verbose
+;;
+esac

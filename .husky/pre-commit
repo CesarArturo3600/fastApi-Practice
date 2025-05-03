@@ -1,5 +1,5 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+# Eliminar la línea . "$(dirname -- "$0")/_/husky.sh" como indica el aviso
 
 # Ejecutar el script JavaScript o simplemente salir con éxito
 node -e "console.log('Pre-commit hook ejecutado correctamente'); process.exit(0);"
