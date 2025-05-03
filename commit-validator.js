@@ -4,11 +4,10 @@ const { execSync } = require("child_process");
 
 // Ejecutar commitlint con --verbose
 try {
-  // Detectar si estamos en Windows o Unix
-  const isWindows = process.platform === "win32";
-  const paramVar = isWindows ? "%1" : "$1";
+  // Obtener el argumento pasado al script
+  const commitMsgFile = process.argv[2];
 
-  execSync(`npx --no -- commitlint --edit ${paramVar} --verbose`, {
+  execSync(`npx --no -- commitlint --edit "${commitMsgFile}" --verbose`, {
     stdio: "inherit",
     shell: true,
   });
@@ -34,8 +33,5 @@ try {
   console.log(
     "\nMás información: https://www.conventionalcommits.org/es/v1.0.0/\n"
   );
-  // El resto del script permanece igual...
-  console.log("\n\n🔍 Formato correcto de commits:\n");
-  // ...
   process.exit(1);
 }

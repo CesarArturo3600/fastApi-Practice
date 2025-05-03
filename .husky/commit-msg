@@ -1,14 +1,5 @@
 #!/usr/bin/env sh
 
-# Version corregida para Windows/Git Bash
+# Usar el script validator que incluye mensajes de ayuda
 
-# Detectar Windows/MINGW de una manera más compatible
-
-case "$(uname -s)" in
-MINGW* | MSYS*) # Windows (Git Bash/MINGW)
-npx --no -- commitlint --edit "$1" --verbose
-;;
-\*) # Unix/Linux u otros sistemas
-npx --no -- commitlint --edit "$1" --verbose
-;;
-esac
+node ./commit-validator.js "$1"
