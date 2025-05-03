@@ -1,0 +1,108 @@
+# Entornos virtuales de Python
+.env
+.venv
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
+
+# Archivos compilados de Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+
+# Distribución / empaquetado
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# Archivos de logs
+*.log
+local_settings.py
+
+# Archivos de pruebas / cobertura
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+.hypothesis/
+.pytest_cache/
+
+# Configuración de editores e IDEs
+# VSCode
+.vscode/*
+!.vscode/settings.json
+!.vscode/tasks.json
+!.vscode/launch.json
+!.vscode/extensions.json
+# PyCharm
+.idea/
+*.iws
+*.iml
+*.ipr
+# Jupyter Notebooks
+.ipynb_checkpoints
+
+# Entornos de desarrollo
+.python-version  # pyenv
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# Bases de datos
+*.sqlite3
+*.db
+
+# Sistema operativo
+.DS_Store  # macOS
+Thumbs.db  # Windows
+ehthumbs.db
+Desktop.ini
+$RECYCLE.BIN/
+.directory  # KDE
+.Trash-*    # Linux
+
+# FastAPI específico
+instance/
+.webassets-cache
+
+# Archivos temporales
+*.swp
+*.swo
+*~
+
+# Secretos y configuraciones locales
+.env
+secrets.toml
+config.local.yaml
+
+# Logs de uvicorn
+uvicorn_access.log
+
+
+#node modules
+node_modules/
