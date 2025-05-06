@@ -106,3 +106,7 @@ uvicorn_access.log
 
 #node modules
 node_modules/
+
+
+#personal
+MI_DOC.md
