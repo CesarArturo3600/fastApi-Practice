@@ -24,6 +24,7 @@ else:
 
 
 class Settings(BaseSettings):
+    DEBUG:bool = os.getenv('DEBUG','False').lower() in('true','1','t')
     #propiedades validas y valores predeterminados desde .env
     USE_MYSQL: bool = os.getenv("USE_MYSQL", "False").lower() in ("true", "1", "t")
     DB_USERNAME: str = os.getenv("DB_USERNAME", "admin")
