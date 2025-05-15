@@ -79,3 +79,67 @@ yarg==0.1.10
 
 
 ```
+
+## Esquema de proyecto
+
+```
+Cliente HTTP → Rutas → Servicios → Repositorios → Modelos → Base de datos
+                 ↑                                    ↑
+                 |                                    |
+             database.py (get_db) ---------------→ database.py (Base)
+                 |                                    |
+                 ↓                                    ↓
+           Esquemas ←-------------------------------- SQLAlchemy
+
+```
+
+## clase Connection
+
+```py
+# Este es un ejemplo conceptual, no código real de SQLAlchemy
+class Engine:
+    def __init__(self, url, **kwargs):
+        # Analiza la URL para determinar el tipo de base de datos, host, usuario, etc.
+        self.url = url
+        self.driver_name, self.connection_params = parse_url(url)
+
+        # Carga el driver adecuado (pymysql, psycopg2, etc.)
+        self.driver = load_driver(self.driver_name)
+
+        # Configura el pool según los parámetros
+        self.pool = ConnectionPool(self, **kwargs)
+
+    def connect(self):
+        # Obtenemos una conexión del pool o creamos una nueva
+        return self.pool.get_connection()
+
+    def _create_raw_connection(self):
+        # Crea una conexión de bajo nivel usando el driver
+        raw_conn = self.driver.connect(
+            host=self.connection_params.host,
+            user=self.connection_params.user,
+            password=self.connection_params.password,
+            database=self.connection_params.database,
+            port=self.connection_params.port
+        )
+
+        # Envuelve la conexión de bajo nivel en un objeto Connection de SQLAlchemy
+        return Connection(self, raw_conn)
+
+class Connection:
+    def __init__(self, engine, raw_connection):
+        self.engine = engine
+        self.raw_connection = raw_connection  # El objeto de conexión real del driver
+        self.transaction = None  # Inicialmente no hay transacción activa
+
+    def execute(self, query, params=None):
+        # Ejecuta una consulta SQL en la conexión
+        cursor = self.raw_connection.cursor()
+        cursor.execute(query, params)
+        return cursor
+
+    def close(self):
+        # Cierra la conexión subyacente
+        self.raw_connection.close()
+
+```
